@@ -21,6 +21,12 @@ const userScheme = mongoose.Schema({
         type:String,
         required:true
     },
+    cloud_id:{
+        type:String,
+    },
+    colud_url:{
+        type:String,
+    },
     note: {
         type:String,
         required:true

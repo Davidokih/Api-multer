@@ -1,13 +1,18 @@
 const UserInfo = require("../models/models")
+const cloudinary = require("../cloudinary")
+const fs = require('fs')
 
 const postUser = async (req, res)=>{
     try {
+        const result = await cloudinary.uploader.upload(req.file.path)
         const userPut = await UserInfo.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
             password: req.body.password,
             image: req.file.path,
+            cloud_id: result.public_id,
+            colud_url: result.secure_url,
             note: req.body.firstName.charAt(0).toUpperCase() + req.body.lastName.charAt(0).toUpperCase()
         })
         res.status(201).json({message:"data created successfully", data:userPut})
@@ -63,6 +68,7 @@ const updateOne = async (req, res)=>{
 const deleteOne = async (req, res)=>{
     try{
         const id = req.params.id
+        const blog = await UserInfo.destroy()
         const remove = await UserInfo.findByIdAndRemove(id)
         res.status(204).json({
             status: 'Remove successfully'
