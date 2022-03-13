@@ -1,21 +1,17 @@
 const mongoose = require("mongoose")
 
 const userScheme = mongoose.Schema({
-    firstName:{
+    schoolName:{
         type:String,
         required:true
     },
-    lastName:{
+    schoolLocation:{
         type:String,
         required:true
     },
-    email:{
-        type:String,
-        required:true
-    },
-    password:{
-        type:String,
-        required:true
+    Date:{
+        type:Date,
+        default:new Date
     },
     image:{
         type:String,
@@ -26,11 +22,11 @@ const userScheme = mongoose.Schema({
     },
     colud_url:{
         type:String,
-    },
-    note: {
-        type:String,
-        required:true
     }
+    // note: {
+    //     type:String,
+    //     required:true
+    // }
 })
 
 module.exports = mongoose.model("user", userScheme)

@@ -6,14 +6,11 @@ const postUser = async (req, res)=>{
     try {
         const result = await cloudinary.uploader.upload(req.file.path)
         const userPut = await UserInfo.create({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: req.body.password,
+            schoolName: req.body.schoolName,
+            schoolLocation: req.body.schoolLocation,
             image: req.file.path,
             cloud_id: result.public_id,
             colud_url: result.secure_url,
-            note: req.body.firstName.charAt(0).toUpperCase() + req.body.lastName.charAt(0).toUpperCase()
         })
         res.status(201).json({message:"data created successfully", data:userPut})
     } catch (error) {
@@ -68,8 +65,10 @@ const updateOne = async (req, res)=>{
 const deleteOne = async (req, res)=>{
     try{
         const id = req.params.id
-        const blog = await UserInfo.destroy()
-        const remove = await UserInfo.findByIdAndRemove(id)
+        const blog = await UserInfo.findById(id)
+        await cloudinary.uploader.destroy(id)
+        await fs.unlinkSync(blog.image)
+        await UserInfo.findByIdAndRemove(id)
         res.status(204).json({
             status: 'Remove successfully'
         })
