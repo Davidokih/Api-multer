@@ -1,9 +1,10 @@
 const cloudinary = require('cloudinary').v2;
+require('dotenv').config()
 
 cloudinary.config({
-    cloud_name: 'lifeofmanel',
-    api_key: '756732784376797',
-    api_secret: 'T-JxigRcWiPSCnzwlT87W9z5up8',
+    cloud_name: CLOUDINARY_NAME,
+    api_key: CLOUDINARY_KEY,
+    api_secret:  CLOUDINARY_API_SECRET,
     secure: true
 })
 

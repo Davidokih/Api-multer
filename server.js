@@ -4,9 +4,10 @@ const mongoose = require('mongoose')
 const port = 2030
 const app = express()
 const myRoute = require("./routeter/routeter")
+require('dotenv').config()
 
 //Creating url database
-const url = "mongodb://localhost/set05"
+const url = ATLAS_KEY
 
 
 //Making use mongodb to create a database

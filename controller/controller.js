@@ -47,6 +47,9 @@ const getOneUser = async(req, res)=>{
 
 const updateOne = async (req, res)=>{
     try{
+        const blog = await UserInfo.findById(id)
+        await cloudinary.uploader.upload(id)
+        await fs.unlinkSync(blog.image)
         const value = await UserInfo.findByIdAndupdate(req.params.id, req.body, {new: true})
         res.status(200).json({
             status: "success",
@@ -60,6 +63,7 @@ const updateOne = async (req, res)=>{
             message: error.message
         })
     } 
+
 }
 
 const deleteOne = async (req, res)=>{
@@ -87,7 +91,6 @@ module.exports ={
     updateOne,
     deleteOne
 }
-
 
 
 
