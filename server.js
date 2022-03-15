@@ -5,9 +5,9 @@ const port = 2030
 const app = express()
 const myRoute = require("./routeter/routeter")
 require('dotenv').config()
-
 //Creating url database
-const url = ATLAS_KEY
+const url= process.env.ATLAS_KEY
+// const url = "mongodb+srv://Davidokih:dav517id@cluster0.1nweu.mongodb.net/HOSTINGSCHOOLAPI?retryWrites=true&w=majority"
 
 
 //Making use mongodb to create a database
