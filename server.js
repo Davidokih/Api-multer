@@ -1,7 +1,7 @@
 
 const express = require('express')
 const mongoose = require('mongoose')
-const port = 2030
+const port = process.env.PORT || 2030
 const app = express()
 const myRoute = require("./routeter/routeter")
 require('dotenv').config()
